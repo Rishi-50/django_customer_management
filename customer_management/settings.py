@@ -72,6 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'customer_management.wsgi.application'
+WSGI_APPLICATION = 'customer_management.wsgi.application'
 
 
 # Database
@@ -79,9 +80,13 @@ WSGI_APPLICATION = 'customer_management.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+           'ENGINE': 'django.db.backends.mysql',
+           'NAME': 'customer_management',
+           'USER': 'root',
+           'PASSWORD': 'rishi3566',
+           'HOST': 'localhost',  # Or your database host
+           'PORT': '3306',  # Default MySQL port
+       }
 }
 
 
