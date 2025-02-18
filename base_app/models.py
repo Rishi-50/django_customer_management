@@ -40,4 +40,4 @@ class Orders(TimeStamps):
     status = models.CharField(max_length=100, null=True, choices=STATUS_CHOICES)
 
     def __str__(self):
-        return self.status
+        return self.product.name
