@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <style>
+        /* General Styling */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: linear-gradient(to right, #b6e0e9, #b6e0e9);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Signup Card */
+        .user_card {
+            width: 380px;
+            margin-top: auto;
+            margin-bottom: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .user_card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Styling */
+        .form_container {
+            margin-top: 20px;
+        }
+
+        /* Form Title */
+        #form-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields */
+        .input-group-text {
+			background: #f7ba5b !important;
+			color: white !important;
+			border: none;
+		}
+
+        .form-control {
+            border-radius: 5px !important;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Register Button */
+        .register_btn {
+            width: 100%;
+			background: #3b3ef2 !important;
+			color: white !important;
+			font-weight: bold;
+			transition: background 0.3s;
+        }
+
+        .register_btn:hover {
+            background: #8a46ff !important;
+        }
+
+        /* Error Messages */
+        .errorlist {
+            color: red;
+            list-style: none;
+            padding-left: 0;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        /* Links */
+        .links a {
+            color: #3b3ef2;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .user_card {
+                width: 90%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container h-100">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <h3 id="form-title">Create Your Account</h3>
+                </div>
+
+                <div class="d-flex justify-content-center form_container">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            {{ form.username }}
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            {{ form.email }}
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            {{ form.password2 }}
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <input class="btn register_btn" type="submit" value="Register">
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Error Messages -->
+                {% if form.errors %}
+                <div class="text-danger mt-2">
+                    <ul class="errorlist">
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* Adding placeholder text dynamically */
+        var form_fields = document.getElementsByTagName('input');
+        form_fields[1].placeholder = 'Enter Username';
+        form_fields[2].placeholder = 'Enter Email';
+        form_fields[3].placeholder = 'Enter Password';
+        form_fields[4].placeholder = 'Confirm Password';
+
+        /* Apply Bootstrap form styling */
+        for (var field in form_fields) {
+            form_fields[field].className += ' form-control';
+        }
+    </script>
+
+</body>
+
+</html>
