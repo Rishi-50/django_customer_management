@@ -1,0 +1,134 @@
+{% extends 'base_app/main.html' %}
+
+{% block content %}
+
+{% include 'base_app/status.html' %}
+
+<style>
+    /* Custom Styles */
+    .card {
+        border-radius: 12px;
+        box-shadow: 0px 4px 8px rgb(176, 161, 161);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .btn {
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .btn-danger:hover {
+        background-color: #dc3545;
+        transform: scale(1.05);
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table th {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+
+    table td {
+        text-align: center;
+        padding: 10px;
+    }
+
+    table tbody tr:nth-child(odd) {
+        background-color: #f8f9fa;
+    }
+
+    table tbody tr:hover {
+        background-color: #e9ecef;
+        cursor: pointer;
+    }
+
+    h5 {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+</style>
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <h5>CUSTOMERS:</h5>
+            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <a href="" class="btn btn-primary btn-sm btn-block mb-2">Create Customer</a>
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for customer in customers %}
+                            <tr>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
+                                <td>{{ customer.name }}</td>
+                                <td>{{ customer.mobile }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <h5>LAST 5 ORDERS</h5>
+            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Date Order</th>
+                                <th>Status</th>
+                                <th>Update</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td>{{ order.product }}</td>
+                                <td>{{ order.created_at }}</td>
+                                <td>{{ order.status }}</td>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

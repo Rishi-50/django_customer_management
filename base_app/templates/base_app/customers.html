@@ -1,0 +1,175 @@
+{% extends 'base_app/main.html' %}
+
+{% block content %}
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+    }
+
+    /* Card Styling */
+    .card {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+    }
+
+    /* Customer Info Section */
+    .customer-info h3, .customer-info h5 {
+        color: #333;
+        font-weight: bold;
+    }
+
+    .customer-info p {
+        font-size: 14px;
+        color: #555;
+    }
+
+    /* Buttons */
+    .btn {
+        border-radius: 5px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .btn-outline-info {
+        border-color: #17a2b8;
+        color: #17a2b8;
+    }
+
+    .btn-outline-info:hover {
+        background: #17a2b8;
+        color: #fff;
+    }
+
+    .btn-outline-danger {
+        border-color: #dc3545;
+        color: #dc3545;
+    }
+
+    .btn-outline-danger:hover {
+        background: #dc3545;
+        color: #fff;
+    }
+
+    /* Total Orders Styling */
+    .total-orders h1 {
+        font-size: 36px;
+        color: #007bff;
+        text-align: center;
+        padding: 10px;
+    }
+
+    /* Table Styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .table th {
+        background: #007bff;
+        color: #fff;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table tr:nth-child(even) {
+        background: #f2f2f2;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .row {
+            flex-direction: column;
+        }
+    }
+
+</style>
+
+<br>
+<div class="row">
+    <!-- Customer Information -->
+    <div class="col-md customer-info">
+        <div class="card card-body">
+            <h3>Customer:</h3>
+            <hr>
+            <a href="" class="btn btn-outline-info btn-block btn-sm" id="update_customer">Update Customer</a>
+            <a href="{% url 'create_order' customer.id %}" class="btn btn-outline-danger btn-block btn-sm" >Place Order</a>
+        </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Contact Information:</h5>
+            <hr>
+            <p>Email: {{customer.email}}</p>
+            <p>Mobile: {{customer.mobile}}</p>
+        </div>
+    </div>
+
+    <!-- Total Orders -->
+    <div class="col-md total-orders">
+        <div class="card card-body">
+            <h5>Total Orders:</h5>
+            <hr>
+            <h1>{{orders_count}}</h1>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- Search Bar -->
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form action="" method="get">
+                    {{customer_filter.form}}    
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- Orders Table -->
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+
+                {% for order in orders %}
+                    <tr>
+                        <td>{{order.product}}</td>
+                        <td>{{order.product.category}}</td>
+                        <td>{{order.created_at}}</td>
+                        <td>{{order.status}}</td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

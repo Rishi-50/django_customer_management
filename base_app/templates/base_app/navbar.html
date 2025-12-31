@@ -1,0 +1,98 @@
+{% load static %}
+
+<style>
+    /* Navbar Styling */
+    .navbar {
+        background: linear-gradient(90deg, #031324, #007bff);
+        padding: 12px 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Logo */
+    .navbar-brand img {
+        height: 50px;
+        border-radius: 5px;
+    }
+
+    /* Navbar Links */
+    .navbar-nav .nav-link {
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 10px 25px;
+        padding-left: 10px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navbar-nav .nav-link:hover, 
+    .navbar-nav .nav-link.active {
+        background: rgb(27, 60, 246);
+        border-radius: 5px;
+    }
+
+    /* User Greeting */
+    #hello-msg {
+        color: rgb(239, 239, 239);
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 20px;
+    }
+
+    /* Logout Button */
+    .logout-btn {
+        background: #ff4d4d;
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out;
+    }
+    
+    .logout-btn:hover {
+        background: #cc0000;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .navbar-nav {
+            text-align: center;
+        }
+        .navbar-nav .nav-link {
+            display: block;
+            width: 100%;
+        }
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto"> 
+                {% if request.user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'home' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'products' %}">Products</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a> 
+                </li>
+            </ul>
+        </div>
+        <span id="hello-msg">Hi, {{ request.user }} 👋</span>
+        <form action="{% url 'logout' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+</nav>

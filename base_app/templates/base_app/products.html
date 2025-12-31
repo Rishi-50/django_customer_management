@@ -1,0 +1,95 @@
+{% extends 'base_app/main.html' %}
+
+{% block content %}
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+    }
+
+    /* Card Styling */
+    .card {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    /* Header Styling */
+    .card h3 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Table Styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .table th {
+        background: #007bff;
+        color: #fff;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table tr:nth-child(even) {
+        background: #f8f9fa;
+    }
+
+    .table tr:hover {
+        background: #e9ecef;
+        transition: 0.3s ease-in-out;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .row {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <!-- Products Header -->
+        <div class="card card-body">
+            <h3>Products</h3>
+        </div>
+
+        <!-- Products Table -->
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+
+                {% for product in products %}
+                    <tr>
+                        <td>{{product.name}}</td>
+                        <td>{{product.category}}</td>
+                        <td>${{product.price}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>    
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base_app/main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+
+    }
+
+    /* Form Card Styling */
+    .card {
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        position: relative;
+        padding-left: 0px;
+        padding-right: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    /* Form Input Styling */
+    form input,
+    form select,
+    form textarea {
+        width: 300%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    /* Submit Button Styling */
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .btn-danger:hover {
+        background-color: #a71d2a;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .row {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .col-md-6 {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-15">
+        <div class="card card-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ formset.management_form }}
+                {% for form in formset %}
+                {{form}}
+                <hr>
+                {% endfor %}
+
+                <input class="btn btn-danger" type="submit" name="Confirm">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

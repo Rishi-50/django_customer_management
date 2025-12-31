@@ -1,0 +1,85 @@
+{% extends 'base_app/main.html' %}
+
+{% block content %}
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+    }
+
+    /* About Section */
+    .about-section {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .about-section h3 {
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .about-section p {
+        font-size: 16px;
+        color: #555;
+        margin-top: 10px;
+    }
+
+    /* Created By Section */
+    .created-by {
+        margin-top: 20px;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .created-by h4 {
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .created-by p {
+        color: #555;
+        font-size: 16px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .row {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<!-- About Page -->
+<div class="row">
+    <div class="col-md">
+        <div class="about-section">
+            <h3>About this application</h3>
+            <p>This CRM system is designed to help small businesses handle their customer relation easily and effectively.</p>
+            <p>From product tracking to customer management, this CRM provides an all-in-one solution for businesses of all sizes.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Created By Section -->
+<div class="row">
+    <div class="col-md">
+        <div class="created-by">
+            <h4>Created By</h4>
+            <p><strong>Your Name</strong></p>
+            <p>Bakend Developer & Data Scientist | CRM Project</p>
+            <p>Email: rishisavla01@gmail.com</p>
+            <p>GitHub: <a href="https://github.com/Rishi-50/django_customer_management" target="_blank">github.com/CRM_project</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
